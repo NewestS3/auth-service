@@ -9,12 +9,14 @@ import {
   Button,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { registrationRequested } from "../../redux/silces/auth.silce";
 import { IRegistration } from "../../model";
+import { RootState } from "../../redux/silces";
 
 const Registration = () => {
+  const { isLoading } = useSelector((state: RootState) => state.auth);
   const [showPassword, setshowPassword] = useState(false);
   const [registrationDetails, setregistrationDetails] = useState<any>({
     firstname: "",
