@@ -20,8 +20,8 @@ function* handleRegistrationRequest(action: any) {
       apiServices.registrationCall,
       action.payload
     );
-
-    yield put(authSlice.actions.registrationSuccess(response));
+      if (response?.status === 200 || response?.status === 201)
+        yield put(authSlice.actions.registrationSuccess(response));
   } catch (error) {
     yield put(authSlice.actions.registrationFailed(error));
   }
