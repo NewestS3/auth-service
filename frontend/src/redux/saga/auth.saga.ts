@@ -3,6 +3,7 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import { authSlice} from '../silces/auth.silce';
 import { RootState } from '../silces';
 import { apiServices } from "../../services/api.services";
+import { AxiosResponse } from "axios";
 function* handleAuthRequest(action: any) {
   try {
     const response = apiServices.logInCall(action.payload);
@@ -13,13 +14,16 @@ function* handleAuthRequest(action: any) {
   }
 }
 
-function* handleRegistrationRequest(action:any){
-  try{
-    const response = apiServices.registrationCall(action.payload);
+function* handleRegistrationRequest(action: any) {
+  try {
+    const response: AxiosResponse = yield call(
+      apiServices.registrationCall,
+      action.payload
+    );
 
     yield put(authSlice.actions.registrationSuccess(response));
-  }catch (error) {
-    yield put(authSlice.actions.registrationFailed(error))
+  } catch (error) {
+    yield put(authSlice.actions.registrationFailed(error));
   }
 }
 
