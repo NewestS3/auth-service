@@ -14,8 +14,10 @@ import { useDispatch } from "react-redux";
 import { authRequested } from "../../redux/silces/auth.silce";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes.constants";
+import { logInTexts } from "../../languages/login";
 
 const Login = () => {
+  const { username, password } = logInTexts;
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,24 +37,31 @@ const Login = () => {
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
       <Stack spacing={2} direction="column">
         {/* username form */}
         <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-username">
-            Username
+            {username.placeHolder}
           </InputLabel>
           <OutlinedInput
             id="outlined-adornment-username"
             type={"text"}
-            label="username"
+            label={username.key}
           />
         </FormControl>
 
         {/* password form */}
         <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">
-            Password
+            {password.placeHolder}
           </InputLabel>
           <OutlinedInput
             id="outlined-adornment-password"
@@ -69,11 +78,16 @@ const Login = () => {
                 </IconButton>
               </InputAdornment>
             }
-            label="Password"
+            label={password.key}
           />
         </FormControl>
 
-        <Stack spacing={2} direction="row">
+        <Stack
+          spacing={2}
+          direction="row"
+          display="flex"
+          justifyContent="space-between"
+        >
           <Button variant="contained" onClick={handleLogIn}>
             Login
           </Button>

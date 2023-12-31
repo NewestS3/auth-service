@@ -15,9 +15,18 @@ function* handleAuthRequest(action: any) {
 
 function* handleRegistrationRequest(action: any) {
   try {
+    const data = action.payload;
+    const body = {
+      firstname: data.firstname,
+      lastname: data.lastname,
+      phoneNo: data.phoneNo,
+      address: data.address,
+      email: data.email,
+      password: data.password,
+    };
     const response: AxiosResponse = yield call(
       apiServices.registrationCall,
-      action.payload
+      body
     );
       if (response?.status === 200 || response?.status === 201)
         yield put(authSlice.actions.registrationSuccess(response));

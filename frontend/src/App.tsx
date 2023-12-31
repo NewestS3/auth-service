@@ -1,16 +1,17 @@
 import React from 'react';
 import Login from './components/login/login';
-import Homepage from "./components/homepage/homepage";
+// import Homepage from "./components/homepage/homepage";
 import Registration from "./components/registration/registration";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { routes } from "./routes.constants";
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route index path="/" element={<Homepage />} />
-        <Route path="/dashboard" element={<Homepage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registration" element={<Registration />} />
+        <Route index path={routes.ROOT} element={<Login />} />
+        {/* <Route path={routes.DASHBOARD} element={<Homepage />} /> */}
+        <Route path={routes.LOGIN} element={<Login />} />
+        <Route path={routes.REGISTRATION} element={<Registration />} />
       </Routes>
     </div>
   );

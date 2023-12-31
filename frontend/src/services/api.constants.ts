@@ -11,3 +11,13 @@ export const URLS = {
 export const Headers = {
   commonHeader,
 };
+
+
+export interface IRegistrationPaylaod {
+  firstname: string;
+  lastname: string;
+  phoneNo: string;
+  email: string;
+  address: string;
+  password: string;
+}

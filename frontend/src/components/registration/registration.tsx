@@ -7,27 +7,41 @@ import {
   InputAdornment,
   IconButton,
   Button,
+  Box,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { registrationRequested } from "../../redux/silces/auth.silce";
-import { IRegistration } from "../../model";
-import { RootState } from "../../redux/silces";
+// import { IRegistration } from "../../model";
+// import { RootState } from "../../redux/silces";
 import { routes } from "../../routes.constants";
+import { IRegistration } from "../../model";
+import { registrationTexts } from "../../languages/registration";
 
 const Registration = () => {
-  const { isLoading } = useSelector((state: RootState) => state.auth);
-  const [showPassword, setshowPassword] = useState(false);
-  const [registrationDetails, setregistrationDetails] = useState<any>({
-    firstname: "",
-    lastname: "",
-    password: "",
-    email: "",
-    phoneNo: "",
-    confirmpassword: "",
-    address: "",
-  });
+  const {
+    firstname,
+    lastname,
+    buttons,
+    phoneNo,
+    email,
+    password,
+    confirmPassword,
+  } = registrationTexts;
+  //  const { isLoading } = useSelector((state: RootState) => state.auth);
+  const [showPassword, setshowPassword] = useState<boolean>(false);
+  const [registrationDetails, setregistrationDetails] = useState<IRegistration>(
+    {
+      firstname: "",
+      lastname: "",
+      password: "",
+      email: "",
+      phoneNo: "",
+      confirmPassword: "",
+      address: "",
+    }
+  );
 
   const handleinput = (event: any) => {
     const { name, value } = event.target;
@@ -49,108 +63,125 @@ const Registration = () => {
   };
 
   return (
-    <Stack spacing={2} direction="column">
-      {/*firstname form */}
-      <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-firstname">
-          firstname
-        </InputLabel>
-        <OutlinedInput
-          id="outlined-adornment-firstname"
-          name="firstname"
-          // type={showPassword ? "text" : "firstname" }
-          label="firstname"
-          onChange={handleinput}
-        />
-      </FormControl>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Stack spacing={2} direction="column">
+        {/*firstname form */}
+        <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-firstname">
+            {firstname.placeHolder}
+          </InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-firstname"
+            name={firstname.name}
+            // type={showPassword ? "text" : "firstname" }
+            label={firstname.label}
+            onChange={handleinput}
+          />
+        </FormControl>
 
-      {/* lastname form */}
-      <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-lastname">lastname</InputLabel>
-        <OutlinedInput
-          id="outlined-adornment-lastname"
-          name="lastname"
-          label="lastname"
-          onChange={handleinput}
-        />
-      </FormControl>
-      <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-email">Phone</InputLabel>
-        <OutlinedInput
-          id="outlined-adornment-email"
-          name="phoneNo"
-          label="phoneNo"
-          onChange={handleinput}
-        />
-      </FormControl>
-      {/* email form */}
-      <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-email">email</InputLabel>
-        <OutlinedInput
-          id="outlined-adornment-email"
-          name="email"
-          label="email"
-          onChange={handleinput}
-        />
-      </FormControl>
+        {/* lastname form */}
+        <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-lastname">
+            {lastname.placeHolder}
+          </InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-lastname"
+            name={lastname.name}
+            label={lastname.label}
+            onChange={handleinput}
+          />
+        </FormControl>
+        <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-email">
+            {phoneNo.placeHolder}
+          </InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-email"
+            name={phoneNo.name}
+            label={phoneNo.label}
+            onChange={handleinput}
+          />
+        </FormControl>
+        {/* email form */}
+        <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-email">
+            {email.placeHolder}
+          </InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-email"
+            name={email.name}
+            label={email.label}
+            onChange={handleinput}
+          />
+        </FormControl>
 
-      {/* password form */}
-      <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-        <OutlinedInput
-          id="outlined-adornment-password"
-          name="password"
-          type={showPassword ? "text" : "password"}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                edge="end"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-          label="Password"
-          onChange={handleinput}
-        />
-      </FormControl>
+        {/* password form */}
+        <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">
+            {password.placeHolder}
+          </InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            name={password.name}
+            type={showPassword ? "text" : "password"}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label={password.label}
+            onChange={handleinput}
+          />
+        </FormControl>
 
-      {/* confirm password form */}
-      <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-confirmpassword">
-          Confirm Password
-        </InputLabel>
-        <OutlinedInput
-          id="outlined-adornment-confirmpassword"
-          name="confirmpassword"
-          type={showPassword ? "text" : "confirmpassword"}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                edge="end"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-          label="confirmpassword"
-          onChange={handleinput}
-        />
-      </FormControl>
-      {/* buttons  */}
-      <Stack spacing={2} direction="row">
-        <Button variant="contained" onClick={handleRegister}>
-          REGISTER
-        </Button>
-        <Button variant="contained" onClick={backToLoginClickHandler}>
-          BACK TO LOGIN
-        </Button>
+        {/* confirm password form */}
+        <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-confirmpassword">
+            {confirmPassword.placeHolder}
+          </InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-confirmpassword"
+            name={confirmPassword.name}
+            type={showPassword ? "text" : "password"}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label={confirmPassword.label}
+            onChange={handleinput}
+          />
+        </FormControl>
+        {/* buttons  */}
+        <Stack spacing={2} direction="row">
+          <Button variant="contained" onClick={handleRegister}>
+            {buttons.register}
+          </Button>
+          <Button variant="contained" onClick={backToLoginClickHandler}>
+            {buttons.backToLogIn}
+          </Button>
+        </Stack>
       </Stack>
-    </Stack>
+    </Box>
   );
 };
 

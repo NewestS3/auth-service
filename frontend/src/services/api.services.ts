@@ -2,9 +2,10 @@
 // we can have multiple this type files if we need
 
 import { baseClient } from "./api.clients";
+import { IRegistrationPaylaod } from "./api.constants";
 import { apiEndpoints } from "./api.endpoints";
 
-const registrationCall = async (payload: any) => {
+const registrationCall = async (payload: IRegistrationPaylaod) => {
   return await baseClient.post(apiEndpoints.registration, payload);
 };
 
