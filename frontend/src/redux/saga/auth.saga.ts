@@ -1,7 +1,6 @@
 // authSaga.ts
 import { takeLatest, put, call } from 'redux-saga/effects';
-import { authSlice} from '../silces/auth.silce';
-import { RootState } from '../silces';
+import { authSlice } from "../silces/auth.silce";
 import { apiServices } from "../../services/api.services";
 import { AxiosResponse } from "axios";
 function* handleAuthRequest(action: any) {

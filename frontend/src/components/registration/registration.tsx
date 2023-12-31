@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { registrationRequested } from "../../redux/silces/auth.silce";
 import { IRegistration } from "../../model";
 import { RootState } from "../../redux/silces";
+import { routes } from "../../routes.constants";
 
 const Registration = () => {
   const { isLoading } = useSelector((state: RootState) => state.auth);
@@ -41,6 +42,10 @@ const Registration = () => {
   const handleRegister = () => {
     dispatch(registrationRequested(registrationDetails));
     // navigate("/");
+  };
+
+  const backToLoginClickHandler = () => {
+    navigate(routes.LOGIN);
   };
 
   return (
@@ -115,7 +120,7 @@ const Registration = () => {
       {/* confirm password form */}
       <FormControl sx={{ m: 1, width: "35ch" }} variant="outlined">
         <InputLabel htmlFor="outlined-adornment-confirmpassword">
-          confirm password
+          Confirm Password
         </InputLabel>
         <OutlinedInput
           id="outlined-adornment-confirmpassword"
@@ -141,12 +146,7 @@ const Registration = () => {
         <Button variant="contained" onClick={handleRegister}>
           REGISTER
         </Button>
-        <Button
-          variant="contained"
-          onClick={() => {
-            handleRegister();
-          }}
-        >
+        <Button variant="contained" onClick={backToLoginClickHandler}>
           BACK TO LOGIN
         </Button>
       </Stack>
