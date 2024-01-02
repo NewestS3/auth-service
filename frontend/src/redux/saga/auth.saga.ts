@@ -3,6 +3,7 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import { authSlice } from "../silces/auth.silce";
 import { apiServices } from "../../services/api.services";
 import { AxiosResponse } from "axios";
+import { routes } from "../../routes.constants";
 function* handleAuthRequest(action: any) {
   try {
     const response = apiServices.logInCall(action.payload);
@@ -24,12 +25,14 @@ function* handleRegistrationRequest(action: any) {
       email: data.email,
       password: data.password,
     };
+
     const response: AxiosResponse = yield call(
       apiServices.registrationCall,
       body
     );
-      if (response?.status === 200 || response?.status === 201)
-        yield put(authSlice.actions.registrationSuccess(response));
+    if (response?.status === 200 || response?.status === 201)
+      yield put(authSlice.actions.registrationSuccess(response));
+    window.location.replace(routes.LOGIN);
   } catch (error) {
     yield put(authSlice.actions.registrationFailed(error));
   }

@@ -33,7 +33,7 @@ const Login = () => {
   const handleLogIn = (e: any) => {
     e.preventDefault();
     dispatch(authRequested({ userName: "sayan", passWord: "sayan" }));
-    navigate(routes.DASHBOARD);
+    //  navigate(routes.DASHBOARD);
   };
 
   return (
